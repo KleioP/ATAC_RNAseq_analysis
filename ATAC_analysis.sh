@@ -140,22 +140,6 @@ do
 
 done
 
-#########################  Motif enrichment analysis with HOMER ####################### 
-
-## Downloading homer and packages 
-
-perl <CURRENT_PATH>/HOMER/configureHomer.pl  -install zebrafish-p 
-perl <CURRENT_PATH>/HOMER/configureHomer.pl  -install zebrafish-o
-perl <CURRENT_PATH>/HOMER/configureHomer.pl  -install danRer11
-export PATH=<CURRENT_PATH>/HOMER/bin/:${PATH}
-
-## see DiffBind Code for generating peak/BED files (by merging replicates per condition) for use by HOMER
-mkdir <OUTPUT_FOLDER/>
-<CURRENT_PATH>/HOMER/bin/findMotifsGenome.pl <peak/BED file from DiffBind> danRer11 <OUTPUT_FOLDER/> -size given  -p 4
-
-
-
-
 #########################  TSS enrichment with ataqv ####################### 
 
 ## the dependencies here have to be reloaded because different versions are required
@@ -176,4 +160,21 @@ done
 
 # run mkarv on the JSON files to generate the interactive web viewer
 mkarv [DIRECTORY_NAME] [LIST HERE ALL SAMPLES TO BE INCLUDED IN THE ANALYSIS] sample_name.ataqv.json.gz
+
+
+#########################  Motif enrichment analysis with HOMER ####################### 
+
+## Downloading homer and packages 
+
+#perl <CURRENT_PATH>/HOMER/configureHomer.pl  -install zebrafish-p 
+#perl <CURRENT_PATH>/HOMER/configureHomer.pl  -install zebrafish-o
+#perl <CURRENT_PATH>/HOMER/configureHomer.pl  -install danRer11
+export PATH=<CURRENT_PATH>/HOMER/bin/:${PATH}
+
+## see DiffBind Code for generating peak/BED files (by merging replicates per condition) for use by HOMER
+mkdir <OUTPUT_FOLDER/>
+<CURRENT_PATH>/HOMER/bin/findMotifsGenome.pl <peak/BED file from DiffBind> danRer11 <OUTPUT_FOLDER/> -size given  -p 4
+
+
+
 

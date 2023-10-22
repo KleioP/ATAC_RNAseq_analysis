@@ -50,6 +50,9 @@ done
 
 ######################### Alignment to Danio rerio genome #########################
 
+#### Genome was indexed using the following command
+# STAR --runThreadN 4 --runMode genomeGenerate --genomeDir <GENOME_PATH> --genomeFastaFiles <GENOME_PATH>/GRCz11.fa
+
 for sample in "${samples[@]}"
 do
     :
@@ -59,10 +62,6 @@ do
     echo ""${sample}" finished"
     
 done
-
-#### Genome was indexed using the following command
-# STAR --runThreadN 4 --runMode genomeGenerate --genomeDir <GENOME_PATH> --genomeFastaFiles <GENOME_PATH>/GRCz11.fa
-
 
 ### SAM to BAM files #
 ### generating bigwig files for visualisation prior to read elimination
