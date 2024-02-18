@@ -16,7 +16,6 @@ library(RColorBrewer)
 ########### Preparation for diff. expression analysis ###################################
 
 ### Generating a matrix with genes and counts for all samples ### 
-#TODO THese should better be in subfolder
 all_files <- list.files(pattern = "*.txt") #filtering feature count output files present in working directory
 
 list <- list() # generating empty list
@@ -40,7 +39,6 @@ RNAseq_counts <- as.matrix(x)
 # turning all colnames into the all_files names
 colnames(RNAseq_counts) <- all_files
 
-#TODO ideally not hard coded. looks more profressional
 #reordering columns to allow for subsetting by comparison in later step
 col.order <- c("cartilRep1.txt", "cartilRep2.txt", "cartilRep3.txt",
                "osteobRep1.txt", "osteobRep2.txt", "osteobRep3.txt", 

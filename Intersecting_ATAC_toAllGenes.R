@@ -122,7 +122,7 @@ venn.diagram(
 
 
 # using x= RNAseq datasets (preparation Script) and
- # y = allGenes_xkb files generated above
+ # y = allGenes_peaks_xkb files generated above
  # going to inner_join(x,y, by = Gene.name),
  # keeping as a result only DEG entries that have ATAC peaks
  # here done for peaks within 5kb of promoter

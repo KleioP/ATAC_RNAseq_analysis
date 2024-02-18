@@ -84,8 +84,8 @@ write.csv(neg, "neg.csv", row.names = F)
 ## Run "Process_Venn_Data" custom function to extract gene names column as single vector
 # for details on function "Process_Venn_Data" see script "Functions.R"
 
-RNAseq_pos_gene_names <- Process_Venn_Data(RNAseq_pos)
-RNAseq_neg_gene_names <- Process_Venn_Data(RNAseq_neg)
+RNAseq_X_gene_names <- Process_Venn_Data(RNAseq_pos_cell_populationX)
+RNAseq_Y_gene_names <- Process_Venn_Data(RNAseq_pos_cell_populationY)
 all <- Process_Venn_Data(all_genes)
 
 # plotting Venn Diagram comparing positive and negative regulated genes
@@ -94,7 +94,7 @@ all <- Process_Venn_Data(all_genes)
 
 myCol <- brewer.pal(3, "Pastel2")
 venn.diagram(
-  x=list(RNAseq_neg_gene_names, RNAseq_pos_gene_names, all),
+  x=list(RNAseq_X_gene_names, RNAseq_Y_gene_names, all),
   category.names = c("Neg", "Pos", "All"),
   filename = "{file_name.tiff}",
   output = TRUE,

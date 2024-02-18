@@ -134,8 +134,43 @@ Metrics are visualised using multiqc. Both STAR and featureCounts log files are 
 
 ### Differential expression analysis (R)
 
-In the subsequent stages of RNA-SEQ analysis, the DESEQ2 package in R is utilised to determine differentially expressed genes
-
+In the subsequent stages of RNA-SEQ analysis, the DESEQ2 package in R is utilised to determine differentially expressed genes. The code can be found in file named "RNAseq_DESEQ2.R".
 
 
 ## Integration 
+
+The goal of ATAC and RNAseq data integration is to gain more insight in gene regulation by 
+(a) revealing which genes that are differentially expressed in a cell population of interest AND have open chromatin in their regulatory regions (either located upstream of the TSS or within introns of the gene)
+(b) extracting the ATAC peaks within the promoters of differentially expressed genes (DEGs), and using HOMER to predict in silico which TFs could bind and regulate the DEGs.
+
+### Data preparation
+
+In the code file "Integr_ATAC_RNAseq_DataPreparation.R" the pre-processing of files necessary for integrative analysis is shown. 
+
+Lines 9-53 are used to read all known transcripts with their locations on the Zv11 reference genome, and generate a file with "Promoter Start" and "Promoter End" columns to identify the likely areas containing regulatory elements for each transcript (Fig. 1).
+
+![Getting Started](./readme_fig1.jpg)
+Figure 1
+
+Lines 58 to 79 show preprocessing of RNAseq analysis results, aka filtering for DEGs with log2FC of over 0.5 (significantly upregulated in cell population X) or log2FC of under -0.5 (significantly downregulated in cell population X). The file is also simplified by keeping only a single entry for each gene (removing entries corresponding to multiple transcripts).
+
+Lines 87-122 show comparisons between DEGs of different cell types (here positively regulated genes in populations X vs Y). An example output is shown in Fig. 2).
+
+![Getting Started](./readme_fig2.jpg)
+Figure 2
+
+### Intersecting ATAC and RNAseq data
+
+The code for this step is found in file "Intersecting_ATAC_toAllGenes.R"
+
+The procedure followed is showed in Figure 3. In short, first the promoters identified during data preparation are scanned for ATAC peaks enriched in the cell population of interest (output of DiffBind, see file ATAC_DiffBind.R). The function Genes_with_Peaks used here is diagrammatically explained in Figure 4.
+
+Genes are then filtered according to the RNAseq data (if they are upregulated in that cell population). Finally, the ATAC peaks found in regulatory region of those genes are extracted and used as input for HOMER (not shown here). 
+
+The outcome of this analysis is a list of transcription factors with the potential of binding and regulating the list of genes that are differentially regulated and that have active regulatory regions in the population of interest.
+
+![Getting Started](./readme_fig3.jpg)
+Figure 3
+
+![Getting Started](./readme_fig4.jpg)
+Figure 4
